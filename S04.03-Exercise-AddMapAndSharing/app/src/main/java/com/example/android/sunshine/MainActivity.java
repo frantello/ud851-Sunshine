@@ -221,7 +221,25 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
             return true;
         }
 
-        // TODO (2) Launch the map when the map menu item is clicked
+        // COMPLETED (2) Launch the map when the map menu item is clicked
+        Uri uri = new Uri.Builder()
+                .scheme("geo")
+                .path("0,0")
+                .appendQueryParameter("q","Marie Curie, 8. Sevilla")
+                .build();
+
+
+        Intent launchMaps = new Intent(Intent.ACTION_VIEW);
+        launchMaps.setData(uri);
+
+        if (launchMaps.resolveActivity(getPackageManager()) != null) {
+
+            startActivity(launchMaps);
+
+        } else {
+
+            Log.e(TAG, "No application can perform this action");
+        }
 
         return super.onOptionsItemSelected(item);
     }
